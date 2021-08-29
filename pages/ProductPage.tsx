@@ -1,7 +1,5 @@
 import { Box } from "@material-ui/core"
 import Head from "next/head"
-import { useState } from "react"
-import { productProps } from "../src/commons.types"
 
 import ProductListEdit from "../src/components/ProductListEdit"
 import CategoryList from "../src/components/CategoryList"
