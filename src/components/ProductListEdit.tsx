@@ -5,7 +5,6 @@ import { COLOR_PALLETE } from "../CONSTANTS"
 import { useStorage } from "../storage"
 import { 
     InputLabel, 
-    Card, 
     Box, 
     BoxProps, 
     List, 
@@ -14,28 +13,12 @@ import {
     Select, 
     MenuItem, 
     FormControl, 
-    FormHelperText, 
-    CardProps, 
+    FormHelperText,
     Divider, 
     ListItemButton ,
-    ListItemText,
-    Typography
+    ListItemText
 } from "@material-ui/core"
 
-
-
-const PRODUCTS = [
-    {
-        id: 1,
-        name: 'product1',
-
-    },
-    {
-        id: 2,
-        name: 'product2',
-        
-    }
-]
 
 export default function ProductListEdit(props: BoxProps) {
     const {products, categories} = useStorage()

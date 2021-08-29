@@ -1,4 +1,4 @@
-import { Box, Container } from "@material-ui/core"
+import { Box } from "@material-ui/core"
 import Head from "next/head"
 import OrderLists from "../src/components/OrderLists"
 import ProductList from "../src/components/ProductList"

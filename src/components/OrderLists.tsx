@@ -1,11 +1,10 @@
-import { List, ListItem, ListItemIcon, Divider, ListItemText, Box, BoxProps, Button, Dialog, DialogTitle } from "@material-ui/core"
-import { Drafts, Inbox } from '@material-ui/icons'
+import { List, ListItem, Divider, Box, BoxProps, Button, Dialog, DialogTitle } from "@material-ui/core"
 import { useState, useMemo } from "react"
 import { useStorage } from "../storage"
 
 
 export default function OrderLists(props: BoxProps) {
-    const {products, myCart, setMyCart} = useStorage()
+    const {products, myCart } = useStorage()
     const [payboxIsOpen, setPayboxIsOpen] = useState(false)
 
     const findProduct = (productId: number) => products.find(product => product.id === productId)

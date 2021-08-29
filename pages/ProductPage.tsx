@@ -1,4 +1,4 @@
-import { Box, Container } from "@material-ui/core"
+import { Box } from "@material-ui/core"
 import Head from "next/head"
 import { useState } from "react"
 import { productProps } from "../src/commons.types"
@@ -10,7 +10,6 @@ import { COLOR_PALLETE } from "../src/CONSTANTS"
 
 
 export default function ProductPage() {
-    const [selectedProduct, setSelectedProduct] = useState<productProps>()
 
     return (
         <Box flexDirection='row' display='flex' minHeight='100vh' >

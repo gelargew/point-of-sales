@@ -1,4 +1,4 @@
-import { Box, BoxProps, Button, List, ListItem, ListItemButton, ListItemText } from "@material-ui/core"
+import { Box, BoxProps, Button, List, ListItem, ListItemText } from "@material-ui/core"
 import { useStorage } from "../storage"
 
 export default function ProductList(props: BoxProps) {

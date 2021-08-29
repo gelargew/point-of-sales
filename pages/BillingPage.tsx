@@ -1,4 +1,4 @@
-import { Box, Button, Container, Dialog, List, ListItemButton, Typography } from "@material-ui/core"
+import { Box, Button, Container, List, ListItemButton, Typography } from "@material-ui/core"
 import { COLOR_PALLETE } from "../src/CONSTANTS"
 import { useStorage } from "../src/storage"
 
