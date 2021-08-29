@@ -1,7 +1,6 @@
 
 import { FormEvent, useEffect, useMemo, useState } from "react"
 import { productProps } from "../commons.types"
-import { COLOR_PALLETE } from "../CONSTANTS"
 import { useStorage } from "../storage"
 import { 
     InputLabel, 
@@ -58,19 +57,6 @@ export default function ProductListEdit(props: BoxProps) {
     )
 }
 
-const ProductBox = (props: BoxProps & { product: productProps}) => {
-    const {product, ...restProps} = props
-    const {categories} = useStorage()
-
-    return (
-        <Box bgcolor={COLOR_PALLETE.mainDim} height={200}  {...restProps}>     
-            <h4>{product.name}</h4>
-            <p>id :{product.id}</p>
-            <p>category: {categories[product.category].name}</p>
-            <p>price: {product.price}</p>                       
-        </Box>
-    )
-}
 
 
 interface ProductEditProps {
