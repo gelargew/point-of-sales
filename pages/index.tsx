@@ -4,11 +4,16 @@ import Box from '@material-ui/core/Box';
 import Link from '../src/Link';
 import { ROUTES } from '../src/CONSTANTS';
 import { List, ListItemButton } from '@material-ui/core';
+import Head from 'next/head';
 
 
 export default function Index() {
   return (
     <Container maxWidth="sm">
+      <Head>
+          <title>Point of Sales</title>
+          <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Box sx={{ my: 4 }}>
         <List>
           {ROUTES.map(route => 

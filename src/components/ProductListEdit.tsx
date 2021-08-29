@@ -15,7 +15,8 @@ import {
     FormHelperText,
     Divider, 
     ListItemButton ,
-    ListItemText
+    ListItemText,
+    SelectChangeEvent
 } from "@material-ui/core"
 
 
@@ -26,9 +27,9 @@ export default function ProductListEdit(props: BoxProps) {
         typeof selectedProductId === 'number' ? products[selectedProductId] : null, [selectedProductId])
 
 
-    const h = (idx: number) => {
+    const selectProduct = (idx: number) => {
         setSelectedProductId(idx)
-        console.log(selectedProduct)
+        console.log(products)
     }
 
     return (
@@ -39,7 +40,7 @@ export default function ProductListEdit(props: BoxProps) {
                 <Box flex={1} display='flex' flexDirection='row' gap={5} flexWrap='wrap' overflow='auto' > 
                     <List>
                         {products.map((product, idx) => 
-                            <ListItemButton key={product.id} onClick={() => h(idx)} >                     
+                            <ListItemButton key={product.id} onClick={() => selectProduct(idx)} >                     
                                 <ListItemText>{product.name}</ListItemText>
                             </ListItemButton>
                         )}  
@@ -69,17 +70,19 @@ const ProductEdit = ({setSelectedProductId, product, idx=0}: ProductEditProps) =
     const {categories, dispatchProducts} = useStorage()
     const [tempName, setTempName] = useState(product ? product.name : '')
     const [tempPrice, setTempPrice] = useState(product ? product.price : 0)   
-    const [tempCategory, setTempCategory] = useState(product ? categories[product.category].name : '')
-    const [selectedCategoryId, setSelectedCategoryId] = useState(0)
+    const [tempCategory, setTempCategory] = useState(categories.find(category => category.id === product?.category)?.name || '')
+    const [selectedCategoryId, setSelectedCategoryId] = useState(1)
 
     useEffect(() => { 
         !product && setTempCategory(categories[0].name)
         setTempName(product ? product.name : '')
         setTempPrice(product ? product.price : 0)
+        setSelectedCategoryId(product ? product.category : 1)
     }, [product])
 
     const handleSubmit = (e:FormEvent) => {
         e.preventDefault()
+        console.log(tempPrice)
         if (!product) dispatchProducts({
             type: 'add',
             payload: {
@@ -98,6 +101,12 @@ const ProductEdit = ({setSelectedProductId, product, idx=0}: ProductEditProps) =
             idx
         })
 
+    }
+
+    const handleCategoryChange = (e: SelectChangeEvent) => {
+        const name = e.target.value
+        setSelectedCategoryId(categories.find(category => category.name === name)?.id || 0)
+        setTempCategory(name)        
     }
 
     return (
@@ -122,14 +131,13 @@ const ProductEdit = ({setSelectedProductId, product, idx=0}: ProductEditProps) =
                 labelId='select-category'
                 label='category'
                 value={tempCategory}
-                onChange={e => setTempCategory(e.target.value)}
+                onChange={handleCategoryChange}
                 >
                 <InputLabel id='select-category'>Category</InputLabel>
                     {categories.map(category => 
                         <MenuItem 
                         key={category.id} 
                         value={category.name} 
-                        onSelect={() => setSelectedCategoryId(category.id)}
                         >
                             {category.name}
                         </MenuItem>)}

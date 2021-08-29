@@ -55,7 +55,8 @@ const CategoryEdit = ({ categoryIdx, editMode, setEditMode, setSelectedCategory}
 
     const handleEdit = (e:FormEvent) => {
         e.preventDefault()
-        if (editMode === 'add') {
+        //prevent adding 2 category with the same name
+        if (editMode === 'add' && !categories.some(category => category.name === tempCategory)) {
             dispatchCategories({
                 payload: tempCategory,
                 type: 'add'

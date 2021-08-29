@@ -13,3 +13,7 @@ npm/yarn dev
 
 ## Raw Design
 [figma](https://www.figma.com/file/YosXeoeM3NjaRRG9qTcZwz/small_pos_app)
+
+## Schema
+
+<img src="assets/posSchema.png" />

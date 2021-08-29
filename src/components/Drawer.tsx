@@ -24,6 +24,7 @@ const useStyles = makeStyles({
 
 type Anchor = 'left'
 export default function TemporaryDrawer() {
+// Material ui bug with deprecated dependencies
 // @ts-ignore
   const classes = useStyles();
   const [state, setState] = React.useState({

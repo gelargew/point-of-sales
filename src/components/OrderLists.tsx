@@ -36,7 +36,7 @@ interface payBoxProps {
 const PayBox = ({payboxIsOpen, setPayboxIsOpen}: payBoxProps) => {
     const {myCart, products, successPay} = useStorage()
     const totalPrice = useMemo(() => {
-        return myCart.reduce((preVal, item) => preVal + products[item]?.price, 0)
+        return myCart.reduce((preVal, item) => preVal + (products.find(product => product.id === item)?.price || 0), 0)
     }, [myCart])
 
     const handlePay = () => {
@@ -49,6 +49,7 @@ const PayBox = ({payboxIsOpen, setPayboxIsOpen}: payBoxProps) => {
             <DialogTitle>Total Price: {totalPrice}</DialogTitle>
             <Divider />
             <Button variant='contained' onClick={handlePay} >Pay</Button>
+            <Button variant='contained' onClick={() => setPayboxIsOpen(false)}>Cancel</Button>
         </Dialog>
     )
 }

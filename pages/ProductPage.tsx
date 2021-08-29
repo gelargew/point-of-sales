@@ -13,6 +13,7 @@ export default function ProductPage() {
         <Box flexDirection='row' display='flex' minHeight='100vh' >
             <Head>
                 <title>Product Page</title>
+                <link rel="icon" href="/favicon.ico" />
             </Head>
 
             
