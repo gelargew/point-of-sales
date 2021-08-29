@@ -32,7 +32,7 @@ export default function ProductListEdit(props: BoxProps) {
     }
 
     return (
-        <Box display='flex' flexDirection='column' gap={5} height='100%' flex={1} {...props} justifyContent='space-between' >
+        <Box display='flex' flexDirection='column' gap={5} height='100%' flex={0.8} {...props} justifyContent='space-between' >
             <h3>Product Lists</h3>
             {categories.length > 0 ?
             <>

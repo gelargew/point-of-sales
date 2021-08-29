@@ -1,4 +1,4 @@
-import { Box, BoxProps, Button, List, ListItem, ListItemText } from "@material-ui/core"
+import { Box, BoxProps, Button, List, ListItem, ListItemText, Typography } from "@material-ui/core"
 import { useStorage } from "../storage"
 
 export default function ProductList(props: BoxProps) {
@@ -12,6 +12,9 @@ export default function ProductList(props: BoxProps) {
 
     return (
         <Box {...props} >
+            <Typography variant='h2'>
+                    Transaction Page
+            </Typography>
             {products.length < 1 && <h3>no Product, check Product page for more info</h3>}
             <List>
                 {products.map((product, idx) => 
