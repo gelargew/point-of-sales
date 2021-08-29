@@ -1,0 +1,45 @@
+1. Membuat mini POS app
+2. tidak perlu menggunakan REST API, hanya menggunakan state atau localstorage
+3. Page
+  - Transaction Page, halaman untuk transaksi
+    - Langsung bayar, tidak perlu simpan
+    - Tidak perlu ada perhitungan pajak
+  - Billing list Page, letak semua transaksi yang terbayar
+  - Produk Page
+    - Kategory Page
+    - Add / Edit product page, list produk bisa di lihat di transaction page
+4. Menggunakan Material UI untuk component-nya
+5. Request
+  - Transaction page (2 component)
+    - kiri component order list
+      - tombol bayar di bagian paling bawah order list
+    - kanan component product list, klik produk, masuk ke order list
+  - drawer di pojok kiri atas
+    - isi dari drawer menu adalah : billing list dan product
+    - jika salah satu drawer menu di klik membuka halaman yang di klik
+  - billing list page
+    - list of transaction
+    - jika salah satu transaksi di klik, akan muncul popup yang berisi item-item transaksi-nya
+  - product page
+    - kategory page
+      - list kategori, dan form untuk tambah / edit kategori dalam satu page
+      - kategori field
+        - id
+        - nama
+    - product page
+      - list product, dan form untuk tambah / edit product dalam satu page
+      - product field
+        - id
+        - nama
+        - harga
+        - kategori
+3. Penilaian
+  - Component (20)
+  - Logic (20)
+  - Struktur (5)
+  - Variable & function name (20)
+  - Comment (10)
+  - Hook (5)
+  - State management (5)
+  - Penggunaan material UI component (5)
+  - hasil akhir (5)
