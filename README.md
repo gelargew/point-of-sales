@@ -8,7 +8,7 @@ npm/yarn dev
 ```
 
 ## SITE 
-[point-of-sales.vercel](https://vercel.com/gelargew/point-of-sales)
+[point-of-sales.vercel](https://point-of-sales-puce.vercel.app/)
 
 
 ## Raw Design
