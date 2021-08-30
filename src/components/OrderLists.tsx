@@ -1,4 +1,5 @@
 import { List, ListItem, Divider, Box, BoxProps, Button, Dialog, DialogTitle, Typography } from "@material-ui/core"
+import { useRouter } from "next/router"
 import { useState, useMemo } from "react"
 import { useStorage } from "../storage"
 
@@ -42,11 +43,12 @@ interface payBoxProps {
 
 const PayBox = ({payboxIsOpen, setPayboxIsOpen, totalPrice=0}: payBoxProps) => {
     const {successPay, myCart} = useStorage()
+    const router = useRouter()
     
 
     const handlePay = () => {
         successPay()
-        setPayboxIsOpen(false)
+        router.push('/BillingPage')
     }
 
     return (
