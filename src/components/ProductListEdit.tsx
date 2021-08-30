@@ -21,7 +21,7 @@ import {
 
 
 export default function ProductListEdit(props: BoxProps) {
-    const {products, categories} = useStorage()
+    const {products, categories, generateRandomProducts} = useStorage()
     const [selectedProductId, setSelectedProductId] = useState<undefined | number>()
     const selectedProduct = useMemo(() => 
         typeof selectedProductId === 'number' ? products[selectedProductId] : null, [selectedProductId])
@@ -33,7 +33,7 @@ export default function ProductListEdit(props: BoxProps) {
     }
 
     return (
-        <Box display='flex' flexDirection='column' gap={5} height='100%' flex={0.8} {...props} justifyContent='space-between' >
+        <Box display='flex' flexDirection='column'  flex={0.8} {...props} justifyContent='space-between' >
             <h3>Product Lists</h3>
             {categories.length > 0 ?
             <>
@@ -41,7 +41,9 @@ export default function ProductListEdit(props: BoxProps) {
                     <List>
                         {products.map((product, idx) => 
                             <ListItemButton key={product.id} onClick={() => selectProduct(idx)} >                     
-                                <ListItemText>{product.name}</ListItemText>
+                                <ListItemText>{product.name}--</ListItemText>
+                                <ListItemText>{product.price}--</ListItemText>
+                                <ListItemText>{categories.find(category => category.id === product.category)?.name}</ListItemText>
                             </ListItemButton>
                         )}  
                     </List>   
@@ -52,7 +54,11 @@ export default function ProductListEdit(props: BoxProps) {
                     <ProductEdit setSelectedProductId={setSelectedProductId} product={selectedProduct} idx={selectedProductId} />                                
                 </Box>   
             </>:
-            <h3>create categories to add product</h3>
+            <Box>
+                <h3>create categories to add product</h3>
+                <Button variant='contained' onClick={() => generateRandomProducts()}>Generate random Products</Button>
+            </Box>
+            
             }                       
         </Box>
     )

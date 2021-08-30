@@ -1,4 +1,4 @@
-import { List, ListItem, Divider, Box, BoxProps, Button, Dialog, DialogTitle } from "@material-ui/core"
+import { List, ListItem, Divider, Box, BoxProps, Button, Dialog, DialogTitle, Typography } from "@material-ui/core"
 import { useState, useMemo } from "react"
 import { useStorage } from "../storage"
 
@@ -6,6 +6,9 @@ import { useStorage } from "../storage"
 export default function OrderLists(props: BoxProps) {
     const {products, myCart } = useStorage()
     const [payboxIsOpen, setPayboxIsOpen] = useState(false)
+    const totalPrice = useMemo(() => {
+        return myCart.reduce((preVal, item) => preVal + (products.find(product => product.id === item)?.price || 0), 0)
+    }, [myCart])
 
     const findProduct = (productId: number) => products.find(product => product.id === productId)
     
@@ -21,23 +24,25 @@ export default function OrderLists(props: BoxProps) {
             </List>
             <Divider />
             {myCart.length > 0?
-            <Button variant='contained' onClick={() => setPayboxIsOpen(true)} >Pay</Button>:
+            <>
+                <Typography>total price: {totalPrice}</Typography>
+                <Button variant='contained' onClick={() => setPayboxIsOpen(true)} >Pay</Button>
+            </>:
             <h4>add Product to your list</h4>}
-            <PayBox {...{payboxIsOpen, setPayboxIsOpen}}  />
+            <PayBox {...{payboxIsOpen, setPayboxIsOpen, totalPrice}}  />
         </Box>
     )
 }
 
 interface payBoxProps {
     payboxIsOpen: boolean,
-    setPayboxIsOpen: (value: boolean) => void
+    setPayboxIsOpen: (value: boolean) => void,
+    totalPrice: number
 }
 
-const PayBox = ({payboxIsOpen, setPayboxIsOpen}: payBoxProps) => {
-    const {myCart, products, successPay} = useStorage()
-    const totalPrice = useMemo(() => {
-        return myCart.reduce((preVal, item) => preVal + (products.find(product => product.id === item)?.price || 0), 0)
-    }, [myCart])
+const PayBox = ({payboxIsOpen, setPayboxIsOpen, totalPrice=0}: payBoxProps) => {
+    const {successPay, myCart} = useStorage()
+    
 
     const handlePay = () => {
         successPay()
@@ -46,6 +51,7 @@ const PayBox = ({payboxIsOpen, setPayboxIsOpen}: payBoxProps) => {
 
     return (
         <Dialog open={payboxIsOpen}>
+            <DialogTitle>Total items: {myCart.length}</DialogTitle>
             <DialogTitle>Total Price: {totalPrice}</DialogTitle>
             <Divider />
             <Button variant='contained' onClick={handlePay} >Pay</Button>

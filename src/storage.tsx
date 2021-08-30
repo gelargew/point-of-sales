@@ -14,7 +14,8 @@ interface storageProps {
     dispatchCategories: React.Dispatch<CategoriesActions>,
     transactions: number[][],
     setTransactions: (transactions: number[][]) => void,
-    successPay: () => void
+    successPay: () => void,
+    generateRandomProducts: (n?: number) => void
 }
 
 const transactionsId = idGenerator()
@@ -30,6 +31,23 @@ const useCreateStorage = () => {
         setMyCart([])
     }
 
+    const generateRandomProducts = (n=10) => {
+        dispatchCategories({
+            type: 'add',
+            payload: 'random'
+        })
+        for (let i = 0; i <= n; i++) {
+            dispatchProducts({
+                type: 'add',
+                payload: {
+                    name: 'product ' + (Math.random() + 1).toString(36).substring(7),
+                    price:  Math.floor(Math.random() * 100000),
+                    category: 1
+                }
+            })
+        }
+    }
+
     return {
         products,
         dispatchProducts,
@@ -39,7 +57,8 @@ const useCreateStorage = () => {
         dispatchCategories,
         transactions,
         setTransactions,
-        successPay
+        successPay,
+        generateRandomProducts
     }
 }
 

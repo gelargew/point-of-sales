@@ -1,5 +1,5 @@
 import React, { FormEvent, useState, useEffect } from "react";
-import { List, ListItemText, Box, ListItem, TextField, Button, BoxProps } from "@material-ui/core";
+import { List, ListItemText, Box, ListItem, TextField, Button, BoxProps, ListItemButton } from "@material-ui/core";
 import { useStorage } from "../storage";
 
 
@@ -18,9 +18,9 @@ export default function CategoryList(props: BoxProps) {
             <h3>Categories</h3>
             <List>
                 {categories.map((category, idx) =>
-                    <ListItem key={category.id} onClick={() => startEditMode(idx)} >
+                    <ListItemButton key={category.id} onClick={() => startEditMode(idx)} >
                         <ListItemText primary={category.name} />
-                    </ListItem>)}
+                    </ListItemButton>)}
             </List>
             {editMode != 'standby'?
             <CategoryEdit 
