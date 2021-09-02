@@ -1,5 +1,6 @@
 import React, { useContext, useReducer, useState } from "react"
 import { CategoriesActions, categoryProps, productProps, ProductsActions } from "./commons.types"
+import { DUMMY_CATEGORIES } from "./CONSTANTS"
 import { categoriesReducer, productsReducer } from "./reducers"
 import { idGenerator } from "./utils"
 
@@ -15,7 +16,9 @@ interface storageProps {
     transactions: number[][],
     setTransactions: (transactions: number[][]) => void,
     successPay: () => void,
-    generateRandomProducts: (n?: number) => void
+    generateRandomProducts: (n?: number) => void,
+    getCategory: (id: number) => string,
+    getProduct: (id: number | undefined) => productProps | undefined
 }
 
 const transactionsId = idGenerator()
@@ -27,26 +30,33 @@ const useCreateStorage = () => {
     const [transactions, setTransactions] = useState<number[][]>([])
 
     const successPay = () => {
+        //add new [transactionId, mycart] to the transactions history, then clear myCart
         setTransactions([...transactions, [transactionsId.next().value as number, ...myCart]])
         setMyCart([])
     }
 
     const generateRandomProducts = (n=10) => {
-        dispatchCategories({
-            type: 'add',
-            payload: 'random'
+        DUMMY_CATEGORIES.forEach(category => {
+            dispatchCategories({
+                type: 'add',
+                payload: category
+            })
         })
+        
         for (let i = 0; i <= n; i++) {
             dispatchProducts({
                 type: 'add',
                 payload: {
                     name: 'product ' + (Math.random() + 1).toString(36).substring(7),
                     price:  Math.floor(Math.random() * 100000),
-                    category: 1
+                    category: Math.floor(Math.random() * 5)
                 }
             })
         }
     }
+
+    const getCategory = (id:number) => categories.find(category => category.id === id)?.name || 'other'
+    const getProduct = (id:number | undefined) => products.find(product => product.id === id)
 
     return {
         products,
@@ -58,7 +68,9 @@ const useCreateStorage = () => {
         transactions,
         setTransactions,
         successPay,
-        generateRandomProducts
+        generateRandomProducts,
+        getCategory,
+        getProduct
     }
 }
 

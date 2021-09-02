@@ -1,5 +1,7 @@
 import { Box, BoxProps, Button, List, ListItem, ListItemText, Typography } from "@material-ui/core"
 import { useStorage } from "../storage"
+import ProductBox from "./ProductBox"
+import { COLOR_PALLETE } from "../CONSTANTS"
 
 export default function ProductList(props: BoxProps) {
     const {products, setMyCart, generateRandomProducts} = useStorage()
@@ -11,7 +13,7 @@ export default function ProductList(props: BoxProps) {
     }
 
     return (
-        <Box {...props} >
+        <Box {...props} display='flex' flexDirection='column' bgcolor={COLOR_PALLETE.mainDark} >
             <Typography variant='h2'>
                     Transaction Page
             </Typography>
@@ -20,14 +22,22 @@ export default function ProductList(props: BoxProps) {
                 <h3>no Product, check Product page for more info</h3>
                 <Button variant='contained' onClick={() => generateRandomProducts()}>Generate random products</Button>
             </Box>}
-            <List>
-                {products.map((product, idx) => 
-                <ListItem key={idx} >
-                    <ListItemText>{product.name}</ListItemText>
-                    <ListItemText>price: {product.price}</ListItemText>
-                    <Button variant='contained'  onClick={() => addToCart(product.id)} >add</Button>
-                </ListItem>)}
-            </List>
+            <Box flex={1}  padding='2rem' display='flex' flexDirection='row' gap={5} flexWrap='wrap' overflow='auto' > 
+                <Box flex={1} display='flex' flexDirection='row' flexWrap='wrap' gap={3} >
+                    {products.map((product, idx) => 
+                        <ProductBox 
+                        key={product.id}
+                        bgcolor={COLOR_PALLETE.mainDim} 
+                        borderRadius='10%' 
+                        padding='1rem'
+                        
+                        {...{product, idx}}>
+                            <Button variant='contained'  onClick={() => addToCart(product.id)} >add</Button>
+                        </ProductBox>
+                    )}  
+                </Box>                                                                               
+            </Box>
+                
         </Box>
     )
 }

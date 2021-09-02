@@ -12,7 +12,7 @@ const productsReducer = (products: productProps[], action: ProductsActions) => {
                 id: productId.next().value as number,
                 ...action.payload
             }
-            console.log(action)
+            console.log(newProduct)
             return [...products, newProduct]
         case 'edit':
             products[action.idx] = {...products[action.idx], ...action.payload}

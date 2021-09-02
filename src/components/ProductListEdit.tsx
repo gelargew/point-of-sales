@@ -16,41 +16,48 @@ import {
     Divider, 
     ListItemButton ,
     ListItemText,
-    SelectChangeEvent
+    SelectChangeEvent,
+    Typography
 } from "@material-ui/core"
+import ProductBox from "./ProductBox"
+import { COLOR_PALLETE } from "../CONSTANTS"
 
 
 export default function ProductListEdit(props: BoxProps) {
-    const {products, categories, generateRandomProducts} = useStorage()
+    const {products, categories, generateRandomProducts, getProduct} = useStorage()
     const [selectedProductId, setSelectedProductId] = useState<undefined | number>()
     const selectedProduct = useMemo(() => 
-        typeof selectedProductId === 'number' ? products[selectedProductId] : null, [selectedProductId])
+        getProduct(selectedProductId), [selectedProductId])
 
 
     const selectProduct = (idx: number) => {
         setSelectedProductId(idx)
-        console.log(products)
     }
 
     return (
-        <Box display='flex' flexDirection='column'  flex={0.8} {...props} justifyContent='space-between' >
+        <Box display='flex' flexDirection='column'  flex={1} {...props} justifyContent='space-between' >
             <h3>Product Lists</h3>
             {categories.length > 0 ?
             <>
-                <Box flex={1} display='flex' flexDirection='row' gap={5} flexWrap='wrap' overflow='auto' > 
-                    <List>
+                <Box flex={1} borderRadius='5%' bgcolor={COLOR_PALLETE.mainDark} padding='2rem' display='flex' flexDirection='row' gap={5} flexWrap='wrap' overflow='auto' > 
+                    <Box flex={1} display='flex' flexDirection='row' flexWrap='wrap' gap={1} >
                         {products.map((product, idx) => 
-                            <ListItemButton key={product.id} onClick={() => selectProduct(idx)} >                     
-                                <ListItemText>{product.name}--</ListItemText>
-                                <ListItemText>{product.price}--</ListItemText>
-                                <ListItemText>{categories.find(category => category.id === product.category)?.name}</ListItemText>
-                            </ListItemButton>
+                            <ProductBox 
+                            key={product.id}
+                            bgcolor={COLOR_PALLETE.mainDim} 
+                            borderRadius='10%' 
+                            padding='1rem'
+
+                            
+                            {...{product, idx}}>
+                                <Button onClick={() => selectProduct(product.id)} >Edit</Button>
+                            </ProductBox>
                         )}  
-                    </List>   
+                    </Box>   
                                                                               
                 </Box>
                 <Divider />
-                <Box flex={0.3} >      
+                <Box flex={0.3} padding='1rem' >      
                     <ProductEdit setSelectedProductId={setSelectedProductId} product={selectedProduct} idx={selectedProductId} />                                
                 </Box>   
             </>:
@@ -67,20 +74,21 @@ export default function ProductListEdit(props: BoxProps) {
 
 
 interface ProductEditProps {
-    product: productProps | null,
+    product?: productProps | null,
     idx?: number,
     setSelectedProductId: (value: number | undefined) => void
 }
 
 const ProductEdit = ({setSelectedProductId, product, idx=0}: ProductEditProps) => {
-    const {categories, dispatchProducts} = useStorage()
+    const {categories, dispatchProducts, getCategory} = useStorage()
     const [tempName, setTempName] = useState(product ? product.name : '')
     const [tempPrice, setTempPrice] = useState(product ? product.price : 0)   
     const [tempCategory, setTempCategory] = useState(categories.find(category => category.id === product?.category)?.name || '')
     const [selectedCategoryId, setSelectedCategoryId] = useState(1)
 
     useEffect(() => { 
-        !product && setTempCategory(categories[0].name)
+        console.log(product)
+        product ? setTempCategory(getCategory(product.category)) : ''
         setTempName(product ? product.name : '')
         setTempPrice(product ? product.price : 0)
         setSelectedCategoryId(product ? product.category : 1)
@@ -159,3 +167,5 @@ const ProductEdit = ({setSelectedProductId, product, idx=0}: ProductEditProps) =
         </form>
     )
 }
+
+

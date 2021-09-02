@@ -51,15 +51,17 @@ const TransactionDetail = ({ transaction, setDetailIsOpen, detailIsOpen}: transa
     const totalPrice = useMemo(() => productIds.reduce((preVal, id) => preVal + (products.find(product => product.id === id)?.price || 0), 0), [transaction])
 
     return (
-        <Dialog open={detailIsOpen}>
+        <Dialog open={detailIsOpen} style={{ justifyContent: 'center'}} >
             <DialogTitle>transaction id: {transaction[0]}</DialogTitle>
             <Divider />
-            {productIds.map((id, idx) => 
-                <ListItem key={idx}>
-                    {products.find(product => product.id === id)?.name}
-                </ListItem>)}
+            <List  >
+                {productIds.map((id, idx) => 
+                    <ListItem style={{ paddingLeft: '2rem' }} key={idx}>
+                        {products.find(product => product.id === id)?.name}
+                    </ListItem>)}
+            </List>
             <Divider />
-            total Price: {totalPrice}
+            <Typography gutterBottom textAlign='center'>total Price: {totalPrice}</Typography>
             <Button variant='contained' onClick={() => setDetailIsOpen(false)}>close</Button>
         </Dialog>
     )

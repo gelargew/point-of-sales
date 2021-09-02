@@ -16,7 +16,7 @@ export default function TransactionPage() {
 
             
             <OrderLists bgcolor={COLOR_PALLETE.main} flex={0.3} />
-            <ProductList flex={1} />
+            <ProductList height='100vh' flex={1} />
             
         </Box>
     )

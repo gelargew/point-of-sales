@@ -1,6 +1,7 @@
 import React, { FormEvent, useState, useEffect } from "react";
-import { List, ListItemText, Box, TextField, Button, BoxProps, ListItemButton } from "@material-ui/core";
+import { List, ListItemText, Box, TextField, Button, BoxProps, ListItemButton, ListItemIcon } from "@material-ui/core";
 import { useStorage } from "../storage";
+import { ArrowRightSharp } from "@material-ui/icons";
 
 
 export default function CategoryList(props: BoxProps) {
@@ -16,12 +17,16 @@ export default function CategoryList(props: BoxProps) {
     return (
         <Box justifyContent='space-between' paddingBottom={10} {...props}>
             <h3>Categories</h3>
-            <List>
-                {categories.map((category, idx) =>
-                    <ListItemButton key={category.id} onClick={() => startEditMode(idx)} >
-                        <ListItemText primary={category.name} />
-                    </ListItemButton>)}
-            </List>
+            <Box flex={1} >
+                <List>
+                    {categories.map((category, idx) =>
+                        <ListItemButton key={category.id} onClick={() => startEditMode(idx)} >
+                            <ListItemIcon><ArrowRightSharp /></ListItemIcon>
+                            <ListItemText primary={category.name} />
+                        </ListItemButton>)}
+                </List>
+            </Box>
+            
             {editMode != 'standby'?
             <CategoryEdit 
             categoryIdx={selectedCategory} 
@@ -87,8 +92,10 @@ const CategoryEdit = ({ categoryIdx, editMode, setEditMode, setSelectedCategory}
                 value={tempCategory} 
                 onChange={e => setTempCategory(e.target.value)}
                 required />
-                <Button variant='contained' color='secondary' type='submit'>Save</Button>
-                <Button variant='contained' color='secondary' onClick={handleClear}>Cancel</Button>
+                <Box >
+                    <Button variant='contained' color='secondary' type='submit'>Save</Button>
+                    <Button variant='contained' color='secondary' onClick={handleClear}>Cancel</Button>
+                </Box>         
             </form>
         </Box>
     )

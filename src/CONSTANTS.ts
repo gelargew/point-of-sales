@@ -1,4 +1,4 @@
-export { ROUTES, COLOR_PALLETE, DUMMY_PRODUCT }
+export { ROUTES, COLOR_PALLETE, DUMMY_PRODUCT, DUMMY_CATEGORIES }
 
 const COLOR_PALLETE = {
     main: '#FFE3E3',
@@ -33,3 +33,5 @@ const DUMMY_PRODUCT = {
     category: 1,
     price: 100
 }
+
+const DUMMY_CATEGORIES = ['food', 'furniture', 'electronic', 'other']
