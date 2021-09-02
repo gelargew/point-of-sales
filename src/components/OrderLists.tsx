@@ -1,11 +1,11 @@
-import { List, Divider, Box, BoxProps, Button, Dialog, DialogTitle, Typography, ListItemButton } from "@material-ui/core"
+import { List, Divider, Box, BoxProps, Button, Dialog, DialogTitle, Typography, ListItem } from "@material-ui/core"
 import { useRouter } from "next/router"
 import { useState, useMemo } from "react"
 import { useStorage } from "../storage"
 
 
 export default function OrderLists(props: BoxProps) {
-    const {products, myCart } = useStorage()
+    const {products, myCart, setMyCart} = useStorage()
     const [payboxIsOpen, setPayboxIsOpen] = useState(false)
     const totalPrice = useMemo(() => {
         return myCart.reduce((preVal, item) => 
@@ -13,6 +13,12 @@ export default function OrderLists(props: BoxProps) {
     }, [myCart])
 
     const findProduct = (productId: number) => products.find(product => product.id === productId)
+    const removeOrder = (idx: number) => {
+        setMyCart(preVal => {
+            preVal.splice(idx, 1)
+            return [...preVal]
+        })
+    }
     
 
     return (
@@ -26,9 +32,14 @@ export default function OrderLists(props: BoxProps) {
             <Box flex={1}>
                 <List>
                     {myCart.map((productId, idx) => 
-                        <ListItemButton key={`${productId}-${idx}`} >
+                    <Box key={`${productId}-${idx}`} justifyContent='space-between' display='flex'>
+                        <ListItem >
                             {findProduct(productId)?.name}
-                        </ListItemButton>
+                            
+                        </ListItem>
+                        <Button onClick={() => removeOrder(idx)} >X</Button>
+                    </Box>
+                        
                     )}
                 </List>
             </Box>

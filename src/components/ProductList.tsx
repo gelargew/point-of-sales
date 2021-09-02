@@ -14,7 +14,7 @@ export default function ProductList(props: BoxProps) {
 
     return (
         <Box {...props} display='flex' flexDirection='column' bgcolor={COLOR_PALLETE.mainDark} >
-            <Typography variant='h2'>
+            <Typography paddingLeft='3rem' variant='h2'>
                     Transaction Page
             </Typography>
             {products.length < 1 && 

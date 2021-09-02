@@ -12,8 +12,8 @@ import {
     MenuItem, 
     FormControl, 
     FormHelperText,
-    Divider,
-    SelectChangeEvent
+    SelectChangeEvent,
+    Container
 } from "@material-ui/core"
 import ProductBox from "./ProductBox"
 import { COLOR_PALLETE } from "../CONSTANTS"
@@ -31,11 +31,10 @@ export default function ProductListEdit(props: BoxProps) {
     }
 
     return (
-        <Box display='flex' flexDirection='column'  flex={1} {...props} justifyContent='space-between' >
-            <h3>Product Lists</h3>
+        <Box display='flex' flexDirection='column'  flex={1} justifyContent='space-between' {...props}  >
             {categories.length > 0 ?
             <>
-                <Box flex={1} borderRadius='5%' bgcolor={COLOR_PALLETE.mainDark} padding='2rem' display='flex' flexDirection='row' gap={5} flexWrap='wrap' overflow='auto' > 
+                <Box flex={1} padding='2rem' display='flex' flexDirection='row' gap={5} flexWrap='wrap' overflow='auto' > 
                     <Box flex={1} display='flex' flexDirection='row' flexWrap='wrap' gap={1} >
                         {products.map((product, idx) => 
                             <ProductBox 
@@ -52,12 +51,17 @@ export default function ProductListEdit(props: BoxProps) {
                     </Box>   
                                                                               
                 </Box>
-                <Divider />
-                <Box flex={0.3} padding='1rem' >      
-                    <ProductEdit setSelectedProductId={setSelectedProductId} product={selectedProduct} idx={selectedProductId} />                                
-                </Box>   
+                <Container>
+                    <Box flex={0.3} padding='1rem' bgcolor='white' >      
+                        <ProductEdit 
+                        setSelectedProductId={setSelectedProductId} 
+                        product={selectedProduct} 
+                        idx={selectedProductId} />                                
+                    </Box>   
+                </Container>
+                
             </>:
-            <Box>
+            <Box padding='5rem' >
                 <h3>create categories to add product</h3>
                 <Button variant='contained' onClick={() => generateRandomProducts()}>Generate random Products</Button>
             </Box>

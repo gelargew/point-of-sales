@@ -10,14 +10,14 @@ export default function ProductBox(props: BoxProps & { product: productProps, id
     const category = getCategory(product.category)
 
     return (
-        <Box display='flex' flexDirection='column' flex='0 0 18%' {...restProps} width={150} >
+        <Box display='flex' flexDirection='column' flex='0 0 19%' {...restProps} width={150} >
             
                 <Typography height='3em' style={{ wordWrap: 'break-word' }} variant='h4'>{product.name}</Typography>
             
                 
                 <Typography textAlign='end'  >{category}</Typography>
-                <Typography textAlign='end'>price: {product.price}</Typography>
-                <Box >
+                <Typography flexGrow={1} textAlign='end'>price: {product.price}</Typography>
+                <Box>
                     {restProps.children}
                 </Box>                   
         </Box>

@@ -26,7 +26,6 @@ export default function MyApp(props: MyAppProps) {
       </Head>  
       <StorageProvider>
         <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
           <TemporaryDrawer />
           <Component {...pageProps} />
