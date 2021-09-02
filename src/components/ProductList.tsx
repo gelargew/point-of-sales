@@ -1,4 +1,4 @@
-import { Box, BoxProps, Button, List, ListItem, ListItemText, Typography } from "@material-ui/core"
+import { Box, BoxProps, Button, Typography } from "@material-ui/core"
 import { useStorage } from "../storage"
 import ProductBox from "./ProductBox"
 import { COLOR_PALLETE } from "../CONSTANTS"

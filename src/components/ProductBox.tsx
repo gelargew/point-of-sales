@@ -1,4 +1,4 @@
-import { BoxProps, Box, Typography, Grid } from "@material-ui/core"
+import { BoxProps, Box, Typography } from "@material-ui/core"
 import { useStorage } from "../storage"
 
 import { productProps } from "../commons.types"

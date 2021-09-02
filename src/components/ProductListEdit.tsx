@@ -5,19 +5,15 @@ import { useStorage } from "../storage"
 import { 
     InputLabel, 
     Box, 
-    BoxProps, 
-    List, 
+    BoxProps,
     TextField, 
     Button, 
     Select, 
     MenuItem, 
     FormControl, 
     FormHelperText,
-    Divider, 
-    ListItemButton ,
-    ListItemText,
-    SelectChangeEvent,
-    Typography
+    Divider,
+    SelectChangeEvent
 } from "@material-ui/core"
 import ProductBox from "./ProductBox"
 import { COLOR_PALLETE } from "../CONSTANTS"
