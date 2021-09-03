@@ -23,7 +23,7 @@ export default function ProductBox(props: BoxProps & { product: productProps, id
         boxShadow='2px 2px 2px 2px rgba(0, 0, 0, 0.4)'
         {...restProps}  >
             
-                <Typography height='3em' style={{ wordWrap: 'break-word' }} variant='h4'>{product.name}</Typography>
+                <Typography minHeight='3em' style={{ wordWrap: 'break-word' }} variant='h4'>{product.name}</Typography>
             
                 
                 <Typography textAlign='end'  >{category}</Typography>

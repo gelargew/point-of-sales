@@ -8,7 +8,7 @@ import { COLOR_PALLETE } from "../src/CONSTANTS"
 
 export default function TransactionPage() {
     return (
-        <Box display='flex' flexDirection='row' minHeight='100vh'>
+        <Box display='flex' flexDirection='row' flexWrap='wrap' minHeight='100vh'>
             <Head>
                 <title>Transaction Page</title>
                 <link rel="icon" href="/favicon.ico" />
