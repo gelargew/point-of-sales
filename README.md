@@ -9,7 +9,7 @@ a small prototype to present the functionality of Point of sales app
 
 ## [Storage](/src/storage.tsx)
 a state that stores global data to be used through the entire app.
-use useStorage hook to access the data
+use useStorage hook to access the state
 ```
 import {useStorage} from 'storage'
 
