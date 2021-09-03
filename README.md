@@ -26,14 +26,19 @@ const App = () => {
 ## How to use
 
 ```
-yarn/npm install
-yarn/npm dev
+yarn install
+yarn dev
+
+/
+
+npm install
+npm dev
 ```
 
 
 
 ## SITE 
-[point-of-sales.vercel](https://point-of-sales-puce.vercel.app/)
+check the live version at [point-of-sales.vercel](https://point-of-sales-puce.vercel.app/)
 
 
 ## Raw Design
