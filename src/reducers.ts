@@ -15,7 +15,8 @@ const productsReducer = (products: productProps[], action: ProductsActions) => {
             console.log(newProduct)
             return [...products, newProduct]
         case 'edit':
-            products[action.idx] = {...products[action.idx], ...action.payload}
+            const idx = products.findIndex(product => product.id === action.id)
+            products[idx] = {...products[idx], ...action.payload}
             return [...products]
         default:
             return [...products]

@@ -16,7 +16,6 @@ import {
     Container
 } from "@material-ui/core"
 import ProductBox from "./ProductBox"
-import { COLOR_PALLETE } from "../CONSTANTS"
 
 
 export default function ProductListEdit(props: BoxProps) {
@@ -38,12 +37,7 @@ export default function ProductListEdit(props: BoxProps) {
                     <Box flex={1} display='flex' flexDirection='row' flexWrap='wrap' gap={1} >
                         {products.map((product, idx) => 
                             <ProductBox 
-                            key={product.id}
-                            bgcolor={COLOR_PALLETE.mainDim} 
-                            borderRadius='10%' 
-                            padding='1rem'
-
-                            
+                            key={product.id}                          
                             {...{product, idx}}>
                                 <Button onClick={() => selectProduct(product.id)} >Edit</Button>
                             </ProductBox>
@@ -52,11 +46,11 @@ export default function ProductListEdit(props: BoxProps) {
                                                                               
                 </Box>
                 <Container>
-                    <Box flex={0.3} padding='1rem' bgcolor='white' >      
+                    <Box flex={0.3} padding='1rem' bgcolor='white' boxShadow='1px 1px 1px 1px gray' >      
                         <ProductEdit 
                         setSelectedProductId={setSelectedProductId} 
                         product={selectedProduct} 
-                        idx={selectedProductId} />                                
+                        selectedProductId={selectedProductId} />                                
                     </Box>   
                 </Container>
                 
@@ -75,19 +69,18 @@ export default function ProductListEdit(props: BoxProps) {
 
 interface ProductEditProps {
     product?: productProps | null,
-    idx?: number,
+    selectedProductId?: number,
     setSelectedProductId: (value: number | undefined) => void
 }
 
-const ProductEdit = ({setSelectedProductId, product, idx=0}: ProductEditProps) => {
+const ProductEdit = ({setSelectedProductId, product, selectedProductId}: ProductEditProps) => {
     const {categories, dispatchProducts, getCategory} = useStorage()
-    const [tempName, setTempName] = useState(product ? product.name : '')
-    const [tempPrice, setTempPrice] = useState(product ? product.price : 0)   
-    const [tempCategory, setTempCategory] = useState(categories.find(category => category.id === product?.category)?.name || '')
+    const [tempName, setTempName] = useState('')
+    const [tempPrice, setTempPrice] = useState(0)   
+    const [tempCategory, setTempCategory] = useState('')
     const [selectedCategoryId, setSelectedCategoryId] = useState(1)
 
     useEffect(() => { 
-        console.log(product)
         product ? setTempCategory(getCategory(product.category)) : ''
         setTempName(product ? product.name : '')
         setTempPrice(product ? product.price : 0)
@@ -96,8 +89,7 @@ const ProductEdit = ({setSelectedProductId, product, idx=0}: ProductEditProps) =
 
     const handleSubmit = (e:FormEvent) => {
         e.preventDefault()
-        console.log(tempPrice)
-        if (!product) dispatchProducts({
+        if (!product || !selectedProductId) dispatchProducts({
             type: 'add',
             payload: {
                 name: tempName,
@@ -112,7 +104,7 @@ const ProductEdit = ({setSelectedProductId, product, idx=0}: ProductEditProps) =
                 price: tempPrice,
                 category: selectedCategoryId
             },
-            idx
+            id: selectedProductId
         })
 
     }

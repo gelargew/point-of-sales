@@ -13,7 +13,7 @@ type add = {
 }
 
 type edit = {
-    idx: number,
+    id: number,
     type: 'edit',
     payload: Pick<productProps, 'name' | 'price' | 'category'>
 }

@@ -5,4 +5,3 @@ function* idGenerator() {
     while (true) yield id++
 }
 
-

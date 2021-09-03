@@ -26,11 +26,7 @@ export default function ProductList(props: BoxProps) {
                 <Box flex={1} display='flex' flexDirection='row' flexWrap='wrap' gap={3} >
                     {products.map((product, idx) => 
                         <ProductBox 
-                        key={product.id}
-                        bgcolor={COLOR_PALLETE.mainDim} 
-                        borderRadius='10%' 
-                        padding='1rem'
-                        
+                        key={product.id}                       
                         {...{product, idx}}>
                             <Button variant='contained'  onClick={() => addToCart(product.id)} >add</Button>
                         </ProductBox>

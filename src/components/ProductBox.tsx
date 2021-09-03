@@ -2,6 +2,7 @@ import { BoxProps, Box, Typography } from "@material-ui/core"
 import { useStorage } from "../storage"
 
 import { productProps } from "../commons.types"
+import { COLOR_PALLETE } from "../CONSTANTS"
 
 
 export default function ProductBox(props: BoxProps & { product: productProps, idx: number }) {
@@ -10,7 +11,16 @@ export default function ProductBox(props: BoxProps & { product: productProps, id
     const category = getCategory(product.category)
 
     return (
-        <Box display='flex' flexDirection='column' flex='0 0 19%' {...restProps} width={150} >
+        <Box 
+        bgcolor={COLOR_PALLETE.mainDim} 
+        padding='1rem' 
+        display='flex' 
+        flexDirection='column' 
+        flex='0 0 19%' 
+        width={150}
+        borderRadius='3%'
+        boxShadow='2px 2px 2px 2px rgba(0, 0, 0, 0.4)'
+        {...restProps}  >
             
                 <Typography height='3em' style={{ wordWrap: 'break-word' }} variant='h4'>{product.name}</Typography>
             

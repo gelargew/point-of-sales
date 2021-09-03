@@ -18,7 +18,7 @@ export default function ProductPage() {
 
             
             <CategoryList display='flex' flexDirection='column' flex={0.3} bgcolor={COLOR_PALLETE.main} paddingTop='3rem' paddingLeft='3rem' />
-            <Box display='flex' flexDirection='column' flex={1} overflow='auto' height='100%' bgcolor={COLOR_PALLETE.mainDark} >
+            <Box paddingBottom='1rem' display='flex' flexDirection='column' flex={1} overflow='auto' height='100%' bgcolor={COLOR_PALLETE.mainDark} >
                 <Typography paddingLeft='4rem' variant='h2'>
                     Product Page
                 </Typography>
