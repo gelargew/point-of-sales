@@ -3,6 +3,7 @@ import { COLOR_PALLETE } from "../src/CONSTANTS"
 import { useStorage } from "../src/storage"
 import Head from "next/head"
 import { useMemo, useState } from "react"
+import { numberToCurrency } from "../src/utils"
 
 export default function BillingPage() {
     const {transactions} = useStorage()
@@ -61,7 +62,7 @@ const TransactionDetail = ({ transaction, setDetailIsOpen, detailIsOpen}: transa
                     </ListItem>)}
             </List>
             <Divider />
-            <Typography gutterBottom textAlign='center'>total Price: {totalPrice}</Typography>
+            <Typography gutterBottom textAlign='center'>total: {numberToCurrency(totalPrice)}</Typography>
             <Button variant='contained' onClick={() => setDetailIsOpen(false)}>close</Button>
         </Dialog>
     )

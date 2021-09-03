@@ -2,6 +2,7 @@ import { List, Divider, Box, BoxProps, Button, Dialog, DialogTitle, Typography, 
 import { useRouter } from "next/router"
 import { useState, useMemo } from "react"
 import { useStorage } from "../storage"
+import { numberToCurrency } from "../utils"
 
 
 export default function OrderLists(props: BoxProps) {
@@ -9,7 +10,7 @@ export default function OrderLists(props: BoxProps) {
     const [payboxIsOpen, setPayboxIsOpen] = useState(false)
     const totalPrice = useMemo(() => {
         return myCart.reduce((preVal, item) => 
-        preVal + (products.find(product => product.id === item)?.price || 0), 0)
+                preVal + (products.find(product => product.id === item)?.price || 0), 0)
     }, [myCart])
 
     const findProduct = (productId: number) => products.find(product => product.id === productId)
@@ -47,7 +48,7 @@ export default function OrderLists(props: BoxProps) {
             <Divider />
             {myCart.length > 0?
             <>
-                <Typography>total price: {totalPrice}</Typography>
+                <Typography>total: {numberToCurrency(totalPrice)}</Typography>
                 <Button variant='contained' onClick={() => setPayboxIsOpen(true)} >Pay</Button>
             </>:
             <h4>add Product to your list</h4>}
@@ -75,7 +76,7 @@ const PayBox = ({payboxIsOpen, setPayboxIsOpen, totalPrice=0}: payBoxProps) => {
     return (
         <Dialog open={payboxIsOpen}>
             <DialogTitle>Total items: {myCart.length}</DialogTitle>
-            <DialogTitle>Total Price: {totalPrice}</DialogTitle>
+            <DialogTitle>Total: {numberToCurrency(totalPrice)}</DialogTitle>
             <Box gap='1rem' display='flex' justifyContent='space-around'  >
                 <Button fullWidth variant='contained' onClick={handlePay} >Pay</Button>
                 <Button fullWidth variant='contained' onClick={() => setPayboxIsOpen(false)}>Cancel</Button>

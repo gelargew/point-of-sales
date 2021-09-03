@@ -3,6 +3,7 @@ import { useStorage } from "../storage"
 
 import { productProps } from "../commons.types"
 import { COLOR_PALLETE } from "../CONSTANTS"
+import { numberToCurrency } from "../utils"
 
 
 export default function ProductBox(props: BoxProps & { product: productProps, idx: number }) {
@@ -26,7 +27,9 @@ export default function ProductBox(props: BoxProps & { product: productProps, id
             
                 
                 <Typography textAlign='end'  >{category}</Typography>
-                <Typography flexGrow={1} textAlign='end'>price: {product.price}</Typography>
+                <Typography flexGrow={1} textAlign='end'>
+                    {numberToCurrency(product.price)}
+                    </Typography>
                 <Box>
                     {restProps.children}
                 </Box>                   
